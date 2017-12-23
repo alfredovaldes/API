@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "An API for querying data",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfredovaldes/API.git"
+  },
+  "author": "Alfredo Valdes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alfredovaldes/API/issues"
+  },
+  "homepage": "https://github.com/alfredovaldes/API#readme"
+}
