@@ -4,6 +4,7 @@ var express = require("express"),
     mongoose = require("mongoose"),
     Dataset = mongoose.model("Dataset"),
     helper = require("../utils");
+    const querystring = require('querystring');
 
 // GET request to push data to the dataset
 router.get("/update", function(req, res) {
@@ -19,7 +20,7 @@ router.get("/update", function(req, res) {
     Dataset.findOne({write_key:apiKey}, function(err, dataset) {
         if (err) {
             console.log("Error retrieving dataset: " + err);
-            res.sendStatus(-1);
+            res.send(err);
         } else if (dataset.data) {
             // build $push query with variables passed in POST request
             // we check that the variable have already been registered otherwise they"ll be ignored
@@ -34,10 +35,10 @@ router.get("/update", function(req, res) {
                             last_entry_at: Date.now()}, function(err, datasetID) {
                 if (err) {
                     console.log("Error updating dataset: " + err);
-                    res.sendStatus(-1);
+                    res.send(500);
                 } else {
                     console.log("New entry for dataset with API key: " + apiKey);
-                    res.sendStatus(1);
+                    res.send(200);
                 }
             });
         } else {
@@ -140,7 +141,7 @@ router.post("/", helper.authenticate, function(req, res) {
     // (this way it will appear in the right order on the 'edit' view)
     var propertiesList = [];
     for (var property in req.body) {
-        if (req.body.hasOwnProperty(property)) {
+        if (req.body[property]!= null) {
             propertiesList.push(property);
         }
     }
@@ -195,7 +196,7 @@ router.put("/:id/", helper.authenticate, function(req, res) {
         }
         // If variable in request body and not in dataset, add to setList (or if no variable at all in dataset)
         for (var property in req.body) {
-            if (!dataset.data||(req.body.hasOwnProperty(property)&!dataset.data.hasOwnProperty(property))) {
+            if (!dataset.data||((req.body[property]!=null)&!(dataset.data[property]!=null))) {
                 console.log(property)
                 console.log(req.body[property])
                 setList["data."+ property] = {name:req.body[property],
@@ -205,7 +206,7 @@ router.put("/:id/", helper.authenticate, function(req, res) {
 
         // If variable in dataset but not in request body, add to unsetList
         for (var property in dataset.data) {
-            if (dataset.data&&dataset.data.hasOwnProperty(property)&!req.body.hasOwnProperty(property))
+            if (dataset.data&&(dataset.data[property]!=null)&!(req.body[property]!=null))
             {
                 unsetList["data."+property] = true;
             }
