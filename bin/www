@@ -9,10 +9,10 @@ var debug = require('debug')('api:server');
 var http = require('http');
 var https = require('https');
 var fs = require('fs');
-
+/*
 var hskey = fs.readFileSync('serverkey.pem');
 var hscert = fs.readFileSync('servercrt.pem')
-
+*/
 
 
 /**
@@ -34,6 +34,7 @@ var server = https.createServer(app);
  */
 
 server.listen(port); 
+
 server.on('error', onError);
 server.on('listening', onListening);
 
