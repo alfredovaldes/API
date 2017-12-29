@@ -33,7 +33,7 @@ router.get("/update", function(req, res) {
             dataset.update({$push: updateQuery,
                             $inc: {entries_number: 1}, 
                             last_entry_at: Date.now()}, function(err, datasetID) {
-                if (err) {
+                if (err) { 
                     console.log("Error updating dataset: " + err);
                     res.send(500);
                 } else {

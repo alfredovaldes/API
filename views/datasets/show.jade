@@ -1,17 +1,18 @@
 extends ../layout
 
 block content
-    h1=dataset.name
+    h1 Topico:
+    h2=dataset.name
     ul.list-unstyled 
         li 
             p 
-                strong Created at:
+                strong Creado el:
                 |  #{dataset.created_at}
             p
-                strong Last entry at: 
+                strong Ultima entrada el: 
                 |  #{dataset.last_entry_at}
             p 
-                strong Entries number:
+                strong Numero de entradas:
                 |  #{dataset.entries_number}
 
     if dataset.data 
