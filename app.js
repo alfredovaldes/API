@@ -8,9 +8,10 @@ path = require("path"),
   mongoose = require("mongoose"),
   session = require("express-session"),
   MongoStore = require("connect-mongo")(session); 
+  var url = process.env.MONGOLAB_URI;
 
 // Connect to mongodb
-mongoose.connect("mongodb://alfredovaldes:Ojougan-1107@iotdb-shard-00-00-02ibz.mongodb.net:27017,iotdb-shard-00-01-02ibz.mongodb.net:27017,iotdb-shard-00-02-02ibz.mongodb.net:27017/test?ssl=true&replicaSet=iotdb-shard-0&authSource=admin", function (err) {
+mongoose.connect("mongodb://alfredovaldes:pkmn62-a4@ds235807.mlab.com:35807/iotdbfs", function (err) {
   if (err) throw err;
   console.log("Successfully connected to mongodb");
 });
