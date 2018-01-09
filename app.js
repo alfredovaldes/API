@@ -9,9 +9,9 @@ path = require("path"),
   session = require("express-session"),
   MongoStore = require("connect-mongo")(session); 
   var url = process.env.MONGOLAB_URI;
-
+  
 // Connect to mongodb
-mongoose.connect("mongodb://alfredovaldes:pkmn62-a4@ds235807.mlab.com:35807/iotdbfs", function (err) {
+mongoose.connect("mongodb://localhost/iotdb", function (err) {
   if (err) throw err;
   console.log("Successfully connected to mongodb");
 });
@@ -27,7 +27,7 @@ users = require("./routes/users"),
 
 // Start app
 var app = express();
-
+ 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
